@@ -24,20 +24,20 @@ public extension AlternateAppIcon {
         /// Create an alternate app icon shelves view.
         ///
         /// - Parameters:
-        ///   - sections: The sections to display in the shelves.
+        ///   - collections: The collections to display as shelves.
         ///   - context: The icon context to affect.
         ///   - onIconSelected: An extra action to trigger when an icon is selected.
         public init(
-            sections: [AlternateAppIcon.Collection],
+            collections: [AlternateAppIcon.Collection],
             context: AlternateAppIconContext,
             onIconSelected: @escaping (AlternateAppIcon) -> Void
         ) {
-            self.sections = sections
+            self.collections = collections
             self.context = context
             self.onIconSelected = onIconSelected
         }
 
-        private let sections: [AlternateAppIcon.Collection]
+        private let collections: [AlternateAppIcon.Collection]
         private let onIconSelected: (AlternateAppIcon) -> Void
 
         @Environment(\.alternateAppIconShelfStyle)
@@ -49,7 +49,7 @@ public extension AlternateAppIcon {
         public var body: some View {
             ScrollView(.vertical) {
                 LazyVStack(spacing: style.sectionSpacing) {
-                    ForEach(Array(sections.enumerated()), id: \.offset) { section in
+                    ForEach(Array(collections.enumerated()), id: \.offset) { section in
                         VStack(alignment: .leading, spacing: style.sectionTitleSpacing) {
                             shelfTitle(for: section.element)
                             shelf(for: section.element)
@@ -190,7 +190,7 @@ public extension EnvironmentValues {
             let icon2 = AlternateAppIcon(icon: .init(.appIcon), iconName: "AppIcon2")
             let icon3 = AlternateAppIcon(icon: .init(.appIcon), iconName: "AppIcon3")
 
-            self.sections = [
+            self.collections = [
                 .init(name: "Section 1", icons: [icon1, icon2, icon3]),
                 .init(name: "Section 2", icons: [icon1, icon2]),
                 .init(name: "Section 3", icons: [icon1]),
@@ -201,10 +201,13 @@ public extension EnvironmentValues {
 
         @StateObject var context = AlternateAppIconContext()
 
-        let sections: [AlternateAppIcon.Collection]
+        let collections: [AlternateAppIcon.Collection]
 
         var body: some View {
-            AlternateAppIcon.Shelf(sections: sections, context: context) { icon in
+            AlternateAppIcon.Shelf(
+                collections: collections,
+                context: context
+            ) { icon in
                 print(icon.iconName)
             }
         }

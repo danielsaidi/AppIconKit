@@ -43,13 +43,24 @@ You can easily create a `LazyVGrid` picker with icons, or use an `AlternateAppIc
     <img src="/Resources/device.png" alt="Screenshot" width=350 />
 </p>
 
-Please create an issue if you need a demo app that demonstrates how to use this SDK. Until then, you can have a look at the SwiftUI previews in the package.
+You can also use the context's `setAlternateAppIcon(...)` to set an icon with code.
+
+> [!IMPORTANT]  
+> Make sure to enable `Include All App Icon Assets` in the app's Info.plist for the app to be able to select icons. Also note that you must add both an `.imageset` and an `.appiconset` for each icon, since SwiftUI can't render `.appiconset`.   
 
 
 
 ## Documentation & Demo app
 
-This SDK will get a proper documentation and demo app once it gets more than 100 stars.
+This library will get a proper documentation and demo app once it gets more than 100 stars.
+
+Until then, check out the getting-started guide above and the demo app below.
+
+
+
+## Demo app
+
+The demo app lets you explore the library. To try it out, just open and run the `Demo` project.
 
 
 
