@@ -57,10 +57,21 @@ public extension AlternateAppIcon {
                     }
                 }
             }
-            .scrollContentBackground(.hidden)
+            .withHiddenScrollContent()
             .background(style.backgroundColor)
             .alternateAppIconItemStyle(style.itemStyle)
         }
+    }
+}
+
+private extension View {
+
+    func withHiddenScrollContent() -> some View {
+        #if os(tvOS)
+        self
+        #else
+        self.scrollContentBackground(.hidden)
+        #endif
     }
 }
 
