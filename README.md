@@ -13,7 +13,7 @@
 
 ## About AppIconKit
 
-AppIconKit helps you manage alternate app icons on macOS and iOS.
+AppIconKit helps you manage alternate app icons on both macOS and iOS.
 
 
 
@@ -29,21 +29,27 @@ https://github.com/danielsaidi/AppIconKit.git
 
 ## Getting Started
 
-This...
+AppIconKit helps you manage alternate app icons on both macOS and iOS.
 
-See the online [getting started guide][Getting-Started] for more information.
+The SDK has a couple of central types:
+
+* Use `AlternateAppIcon` to create a list of all alternate icons in your app. 
+* Use `AlternateAppIcon.Collection` to create icon collections.
+* Use an `AlternateAppIconContext` to keep track of the selected icon.
+
+You can easily create a `LazyVGrid` picker with icons, or use an `AlternateAppIcon.Shelf`:
+
+<p align="center">
+    <img src="/Resources/device.png" alt="Screenshot" width=350 />
+</p>
+
+Please create an issue if you need a demo app that demonstrates how to use this SDK. Until then, you can have a look at the SwiftUI previews in the package.
 
 
 
-## Documentation
+## Documentation & Demo app
 
-The online [documentation][Documentation] has more information, articles, code examples, etc.
-
-
-
-## Demo Application
-
-The `Demo` folder has an app that lets you explore the library and integrate with a few APIs.
+This SDK will get a proper documentation and demo app once it gets more than 100 stars.
 
 
 

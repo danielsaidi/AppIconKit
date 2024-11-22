@@ -37,8 +37,8 @@ public struct AlternateAppIcon {
 
 public extension AlternateAppIcon {
 
-    /// This struct can be used to group icons together.
-    struct Section {
+    /// An icon collection can group icons together.
+    struct Collection {
 
         /// Create an alternate app icon value.
         ///

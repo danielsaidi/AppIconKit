@@ -10,8 +10,8 @@ import SwiftUI
 
 public extension AlternateAppIcon {
 
-    /// This view lists alternate icon sections in a list of
-    /// horizontally scrolling shelves.
+    /// This view lists alternate icon collections in a list
+    /// of horizontally scrolling shelves.
     ///
     /// The shelves will use ``AlternateAppIcon/Item`` views.
     /// You can style this component with the style modifier
@@ -28,7 +28,7 @@ public extension AlternateAppIcon {
         ///   - context: The icon context to affect.
         ///   - onIconSelected: An extra action to trigger when an icon is selected.
         public init(
-            sections: [AlternateAppIcon.Section],
+            sections: [AlternateAppIcon.Collection],
             context: AlternateAppIconContext,
             onIconSelected: @escaping (AlternateAppIcon) -> Void
         ) {
@@ -37,7 +37,7 @@ public extension AlternateAppIcon {
             self.onIconSelected = onIconSelected
         }
 
-        private let sections: [AlternateAppIcon.Section]
+        private let sections: [AlternateAppIcon.Collection]
         private let onIconSelected: (AlternateAppIcon) -> Void
 
         @Environment(\.alternateAppIconShelfStyle)
@@ -66,10 +66,10 @@ public extension AlternateAppIcon {
 
 private extension AlternateAppIcon.Shelf {
 
-    func shelf(for section: AlternateAppIcon.Section) -> some View {
+    func shelf(for collection: AlternateAppIcon.Collection) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: style.itemSpacing) {
-                ForEach(Array(section.icons.enumerated()), id: \.offset) {
+                ForEach(Array(collection.icons.enumerated()), id: \.offset) {
                     shelfItem(for: $0.element)
                 }
             }
@@ -89,8 +89,8 @@ private extension AlternateAppIcon.Shelf {
         }
     }
 
-    func shelfTitle(for section: AlternateAppIcon.Section) -> some View {
-        Text(section.name)
+    func shelfTitle(for collection: AlternateAppIcon.Collection) -> some View {
+        Text(collection.name)
             .font(.footnote)
             .textCase(.uppercase)
             .foregroundColor(.secondary)
@@ -190,7 +190,7 @@ public extension EnvironmentValues {
 
         @StateObject var context = AlternateAppIconContext()
 
-        let sections: [AlternateAppIcon.Section]
+        let sections: [AlternateAppIcon.Collection]
 
         var body: some View {
             AlternateAppIcon.Shelf(sections: sections, context: context) { icon in
