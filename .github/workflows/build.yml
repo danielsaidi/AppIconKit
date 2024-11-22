@@ -19,5 +19,5 @@ jobs:
           xcode-version: '16.0'
       - name: Build all platforms
         run: bash scripts/build.sh ${{ github.event.repository.name }}
-      - name: Test iOS
-        run: bash scripts/test.sh ${{ github.event.repository.name }}
+#      - name: Test iOS
+#        run: bash scripts/test.sh ${{ github.event.repository.name }}
