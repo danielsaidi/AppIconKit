@@ -6,6 +6,7 @@
 ## ✨ Features
 
 * `AlternateAppIconContext` has a new reset function.
+* `AlternateAppIcon.ShelfStyle` has been slightly adjusted.
 
 
 ## 0.1

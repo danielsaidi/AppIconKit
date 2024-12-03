@@ -56,6 +56,7 @@ public extension AlternateAppIcon {
                         }
                     }
                 }
+                .padding(.vertical, style.scrollPadding)
             }
             .withHiddenScrollContent()
             .background(style.backgroundColor)
@@ -128,20 +129,23 @@ public extension AlternateAppIcon {
         /// Create a custom style.
         ///
         /// - Parameters:
-        ///   - sectionSpacing: The spacing between sections, by default `20`.
+        ///   - scrollPadding: The vertical scroll padding, by default `20`.
+        ///   - sectionSpacing: The spacing between sections, by default `40`.
         ///   - sectionTitleSpacing: The spacing between section title and items, by default `10`.
         ///   - sectionPadding: The horizontal padding of each section, by default `nil`.
         ///   - itemStyle: The item style, by default `.standard`.
         ///   - itemSpacing: The spacing between items, by default `16`.
         ///   - backgroundColor: The shelf background color.
         public init(
-            sectionSpacing: Double = 20,
+            scrollPadding: Double = 20,
+            sectionSpacing: Double = 40,
             sectionTitleSpacing: Double = 10,
             sectionPadding: CGFloat? = nil,
             itemStyle: ItemStyle = .standard,
             itemSpacing: Double = 16,
             backgroundColor: Color = .primary.opacity(0.05)
         ) {
+            self.scrollPadding = scrollPadding
             self.sectionSpacing = sectionSpacing
             self.sectionTitleSpacing = sectionTitleSpacing
             self.sectionPadding = sectionPadding
@@ -150,6 +154,7 @@ public extension AlternateAppIcon {
             self.backgroundColor = backgroundColor
         }
 
+        public var scrollPadding: Double
         public var sectionSpacing: Double
         public var sectionTitleSpacing: Double
         public var sectionPadding: CGFloat?
