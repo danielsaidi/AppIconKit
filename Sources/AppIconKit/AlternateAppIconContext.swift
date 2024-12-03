@@ -51,7 +51,11 @@ public extension AlternateAppIconContext {
         #if os(iOS) || os(tvOS)
         UIApplication.shared.setAlternateIconName(name)
         #elseif os(macOS)
-        NSApplication.shared.applicationIconImage = Bundle.main.image(forResource: name)
+        if let name {
+            NSApplication.shared.applicationIconImage = Bundle.main.image(forResource: name)
+        } else {
+            NSApplication.shared.applicationIconImage = nil
+        }
         #endif
     }
 }
