@@ -1,6 +1,13 @@
 # Release Notes
 
 
+## 0.1.1
+
+## ✨ Features
+
+* `AlternateAppIconContext` has a new reset function.
+
+
 ## 0.1
 
 This is the first beta version of AppIconKit.

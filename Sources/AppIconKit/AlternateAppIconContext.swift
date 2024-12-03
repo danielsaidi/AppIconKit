@@ -29,11 +29,24 @@ public class AlternateAppIconContext: ObservableObject {
 
 public extension AlternateAppIconContext {
 
-    func setAlternateAppIcon(_ icon: AlternateAppIcon) {
+    /// Reset the alternate app icon.
+    func resetAlternateAppIcon(
+        _ icon: AlternateAppIcon
+    ) {
+        setAlternateAppIconName(nil)
+    }
+
+    /// Set a certain alternate app icon.
+    func setAlternateAppIcon(
+        _ icon: AlternateAppIcon
+    ) {
         setAlternateAppIconName(icon.iconName)
     }
 
-    func setAlternateAppIconName(_ name: String) {
+    /// Set an alternate app icon with a certain name.
+    func setAlternateAppIconName(
+        _ name: String?
+    ) {
         alternateAppIconName = name
         #if os(iOS) || os(tvOS)
         UIApplication.shared.setAlternateIconName(name)
