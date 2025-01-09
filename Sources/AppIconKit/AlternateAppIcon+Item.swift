@@ -37,11 +37,11 @@ public extension AlternateAppIcon {
         ///
         /// - Parameters:
         ///   - icon: The icon asset.
-        ///   - iconName: The name of the icon.
+        ///   - iconName: The name of the icon, if any.
         ///   - isSelected: Whether or not the icon is selected.
         public init(
             icon: Image,
-            iconName: String,
+            iconName: String?,
             isSelected: Bool = false
         ) {
             self.icon = icon
@@ -50,7 +50,7 @@ public extension AlternateAppIcon {
         }
 
         private let icon: Image
-        private let iconName: String
+        private let iconName: String?
         private let isSelected: Bool
 
         @Environment(\.alternateAppIconItemStyle)

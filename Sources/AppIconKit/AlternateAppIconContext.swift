@@ -30,9 +30,7 @@ public class AlternateAppIconContext: ObservableObject {
 public extension AlternateAppIconContext {
 
     /// Reset the alternate app icon.
-    func resetAlternateAppIcon(
-        _ icon: AlternateAppIcon
-    ) {
+    func resetAlternateAppIcon() {
         setAlternateAppIconName(nil)
     }
 
@@ -57,5 +55,13 @@ public extension AlternateAppIconContext {
             NSApplication.shared.applicationIconImage = nil
         }
         #endif
+    }
+}
+
+public extension AlternateAppIconContext {
+    
+    @available(*, deprecated, message: "This function no longer takes an icon.")
+    func resetAlternateAppIcon(_ icon: AlternateAppIcon) {
+        resetAlternateAppIcon()
     }
 }

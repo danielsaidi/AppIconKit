@@ -1,19 +1,32 @@
 # Release Notes
 
 
+## 0.2
+
+### ✨ Features
+
+* The `AlternateAppIcon` and its `Item` can now use a `nil` icon name.
+
+### 💡 Adjustments
+
+* The `AlternateAppIconContext`'s `resetAlternateAppIcon()` no longer takes an icon.
+
+
+
 ## 0.1.1
 
-## ✨ Features
+### ✨ Features
 
-* `AlternateAppIconContext` has a new reset function.
-* `AlternateAppIcon.ShelfStyle` has been slightly adjusted.
+* The `AlternateAppIconContext` has a new reset function.
+* The `AlternateAppIcon.ShelfStyle` has been slightly adjusted.
+
 
 
 ## 0.1
 
 This is the first beta version of AppIconKit.
 
-## ✨ Features
+### ✨ Features
 
 * The `AlternateAppIcon` contains app information.
 * The `AlternateAppIcon.Collection` can be used to group icons.

@@ -191,7 +191,7 @@ public extension EnvironmentValues {
     struct Preview: View {
 
         init() {
-            let icon1 = AlternateAppIcon(icon: .init(.appIcon), iconName: "AppIcon1")
+            let icon1 = AlternateAppIcon(icon: .init(.appIcon), iconName: nil)
             let icon2 = AlternateAppIcon(icon: .init(.appIcon), iconName: "AppIcon2")
             let icon3 = AlternateAppIcon(icon: .init(.appIcon), iconName: "AppIcon3")
 
@@ -213,7 +213,7 @@ public extension EnvironmentValues {
                 collections: collections,
                 context: context
             ) { icon in
-                print(icon.iconName)
+                print(icon.iconName ?? "Default")
             }
         }
     }
