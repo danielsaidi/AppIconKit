@@ -1,6 +1,14 @@
 # Release Notes
 
 
+## 0.3
+
+### ✨ Features
+
+* The `AlternateAppIcon.Collection` has a new initializer that lets you set up collections in a template-driven way.
+
+
+
 ## 0.2
 
 ### ✨ Features

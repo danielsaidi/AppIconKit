@@ -38,29 +38,3 @@ public struct AlternateAppIcon {
     /// The name of the alternate icon, if any.
     public let iconName: String?
 }
-
-public extension AlternateAppIcon {
-
-    /// An icon collection can group icons together.
-    struct Collection {
-
-        /// Create an alternate app icon value.
-        ///
-        /// - Parameters:
-        ///   - name: The name of the section.
-        ///   - icons: The icons in the section.
-        public init(
-            name: LocalizedStringKey,
-            icons: [AlternateAppIcon]
-        ) {
-            self.name = name
-            self.icons = icons
-        }
-
-        /// The name of the section.
-        public let name: LocalizedStringKey
-
-        /// The icons in the section.
-        public let icons: [AlternateAppIcon]
-    }
-}

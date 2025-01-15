@@ -50,9 +50,9 @@ You can also use the context's `setAlternateAppIcon(...)` to set an icon with co
 
 
 
-## Documentation & Demo app
+## Documentation
 
-This library will get a proper documentation once it gets more than 100 stars. Until then, check out the getting-started guide above and the demo app below.
+This library will get a proper documentation once it gets more than 100 stars. 
 
 
 
