@@ -31,6 +31,7 @@ public extension AlternateAppIconContext {
 
     /// Reset the alternate app icon.
     func resetAlternateAppIcon() {
+        guard alternateAppIconName != nil else { return }
         setAlternateAppIconName(nil)
     }
 

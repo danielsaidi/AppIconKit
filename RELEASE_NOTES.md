@@ -1,6 +1,14 @@
 # Release Notes
 
 
+## 0.3.1
+
+### 💡 Adjustments
+
+* The `AlternateAppIconContext` now aborts resetting when no icon is set.
+
+
+
 ## 0.3
 
 ### ✨ Features
