@@ -33,11 +33,13 @@ AppIconKit helps you manage alternate app icons on both macOS and iOS.
 
 The SDK has a couple of central types:
 
-* Use `AlternateAppIcon` to create a list of all alternate icons in your app. 
-* Use `AlternateAppIcon.Collection` to create icon collections.
-* Use an `AlternateAppIconContext` to keep track of the selected icon.
+* Use `AlternateAppIcon` to create alternate icon values for your app.
+* Use `AlternateAppIconContext` to keep track of and affect the current icon. 
+* Use `AlternateAppIconCollection` to group icons into related collections.
+* Use `AlternateAppIconListItem` when listing an app icon in lits and grids.
+* Use `AlternateAppIconShelf` to list app icons in a vertical list of horizontal shelves.
 
-You can easily create a `LazyVGrid` picker with icons, or use an `AlternateAppIcon.Shelf`:
+You can easily create a `LazyVGrid` picker with icons, or use an `AlternateAppIconShelf`:
 
 <p align="center">
     <img src="/Resources/device.png" alt="Screenshot" width=350 />

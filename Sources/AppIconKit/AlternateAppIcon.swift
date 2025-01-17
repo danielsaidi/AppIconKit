@@ -3,7 +3,7 @@
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2024-11-22.
-//  Copyright © 2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -14,9 +14,6 @@ import SwiftUI
 /// The `icon` is the icon asset to display, while `iconName`
 /// is the name of the icon to set when the icon is selected.
 /// You can make set `iconName` to nil to reset the app icon.
-///
-/// The type is also a namespace of related icon types, like
-/// ``AlternateAppIcon/Item`` & ``AlternateAppIcon/ItemStyle``.
 public struct AlternateAppIcon {
 
     /// Create an alternate app icon value.

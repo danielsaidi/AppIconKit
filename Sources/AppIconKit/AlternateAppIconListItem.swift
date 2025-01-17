@@ -1,82 +1,78 @@
 //
-//  AlternateAppIconItem.swift
+//  AlternateAppIconListItem.swift
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2024-11-22.
-//  Copyright © 2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension AlternateAppIcon {
+/// This view can be used to list alternate app icons in
+/// a list or grid.
+///
+/// You can style this component with the style modifier
+/// ``SwiftUICore/View/alternateAppIconListItemStyle(_:)``.
+public struct AlternateAppIconListItem: View {
 
-    /// This view can be used to list alternate app icons in
-    /// a list or grid.
+    /// Create an alternate icon list item.
     ///
-    /// You can style this component with the style modifier
-    /// ``SwiftUICore/View/alternateAppIconItemStyle(_:)``.
-    struct Item: View {
-
-        /// Create an alternate icon list item.
-        ///
-        /// - Parameters:
-        ///   - icon: The alternate app icon to display.
-        ///   - isSelected: Whether or not the icon is selected.
-        public init(
-            icon: AlternateAppIcon,
-            isSelected: Bool = false
-        ) {
-            self.init(
-                icon: icon.icon,
-                iconName: icon.iconName,
-                isSelected: isSelected
-            )
-        }
-
-        /// Create an alternate icon list item.
-        ///
-        /// - Parameters:
-        ///   - icon: The icon asset.
-        ///   - iconName: The name of the icon, if any.
-        ///   - isSelected: Whether or not the icon is selected.
-        public init(
-            icon: Image,
-            iconName: String?,
-            isSelected: Bool = false
-        ) {
-            self.icon = icon
-            self.iconName = iconName
-            self.isSelected = isSelected
-        }
-
-        private let icon: Image
-        private let iconName: String?
-        private let isSelected: Bool
-
-        @Environment(\.alternateAppIconItemStyle)
-        private var style
-
-        public var body: some View {
-            GeometryReader { geo in
-                icon.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(0.225 * geo.size.width)
-                    .shadow(
-                        color: style.iconShadowColor,
-                        radius: 0,
-                        x: 0,
-                        y: style.iconShadowSize)
-                    .overlay(alignment: style.checkmarkAlignment) {
-                        checkmark(for: geo)
-                    }
-            }
-            .frame(width: style.iconSize, height: style.iconSize)
-        }
+    /// - Parameters:
+    ///   - icon: The alternate app icon to display.
+    ///   - isSelected: Whether or not the icon is selected.
+    public init(
+        icon: AlternateAppIcon,
+        isSelected: Bool = false
+    ) {
+        self.init(
+            icon: icon.icon,
+            iconName: icon.iconName,
+            isSelected: isSelected
+        )
     }
 
+    /// Create an alternate icon list item.
+    ///
+    /// - Parameters:
+    ///   - icon: The icon asset.
+    ///   - iconName: The name of the icon, if any.
+    ///   - isSelected: Whether or not the icon is selected.
+    public init(
+        icon: Image,
+        iconName: String?,
+        isSelected: Bool = false
+    ) {
+        self.icon = icon
+        self.iconName = iconName
+        self.isSelected = isSelected
+    }
+
+    private let icon: Image
+    private let iconName: String?
+    private let isSelected: Bool
+
+    @Environment(\.alternateAppIconListItemStyle)
+    private var style
+
+    public var body: some View {
+        GeometryReader { geo in
+            icon.resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(0.225 * geo.size.width)
+                .shadow(
+                    color: style.iconShadowColor,
+                    radius: 0,
+                    x: 0,
+                    y: style.iconShadowSize)
+                .overlay(alignment: style.checkmarkAlignment) {
+                    checkmark(for: geo)
+                }
+        }
+        .frame(width: style.iconSize, height: style.iconSize)
+    }
 }
 
-private extension AlternateAppIcon.Item {
+private extension AlternateAppIconListItem {
 
     func checkmark(for geo: GeometryProxy) -> some View {
         Image(systemName: "checkmark")
@@ -98,10 +94,10 @@ private extension AlternateAppIcon.Item {
     }
 }
 
-public extension AlternateAppIcon {
+public extension AlternateAppIconListItem {
 
-    /// This style can style an ``AlternateAppIcon/Item``.
-    struct ItemStyle: Sendable {
+    /// This style can style an ``AlternateAppIconListItem``.
+    struct Style: Sendable {
 
         /// Create a custom style.
         ///
@@ -145,39 +141,37 @@ public extension AlternateAppIcon {
     }
 }
 
-public extension AlternateAppIcon.ItemStyle {
+public extension AlternateAppIconListItem.Style {
 
-    /// The standard alternate app icon item style.
     static var standard: Self { .init() }
 }
 
 public extension View {
 
-    /// Apply a ``AlternateAppIcon/ItemStyle``.
-    func alternateAppIconItemStyle(
-        _ style: AlternateAppIcon.ItemStyle
+    /// Apply a ``AlternateAppIconListItem/Style``.
+    func alternateAppIconListItemStyle(
+        _ style: AlternateAppIconListItem.Style
     ) -> some View {
-        self.environment(\.alternateAppIconItemStyle, style)
+        self.environment(\.alternateAppIconListItemStyle, style)
     }
 }
 
 public extension EnvironmentValues {
 
-    /// Apply a ``AlternateAppIcon/ItemStyle``.
-    @Entry var alternateAppIconItemStyle = AlternateAppIcon.ItemStyle.standard
+    @Entry var alternateAppIconListItemStyle = AlternateAppIconListItem.Style.standard
 }
 
 #Preview {
     
     HStack {
 
-        AlternateAppIcon.Item(
+        AlternateAppIconListItem(
             icon: .init(.appIcon),
             iconName: "AppIcon",
             isSelected: true
         )
 
-        AlternateAppIcon.Item(
+        AlternateAppIconListItem(
             icon: .init(.appIcon),
             iconName: "AppIcon",
             isSelected: false

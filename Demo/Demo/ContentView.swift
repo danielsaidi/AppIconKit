@@ -32,7 +32,7 @@ struct ContentView: View {
     @StateObject
     var context = AlternateAppIconContext()
 
-    var collections: [AlternateAppIcon.Collection] {
+    var collections: [AlternateAppIconCollection] {
         [
             .init(name: "Collection 1", icons: [.blue, .green, .red, .yellow]),
             .init(name: "Collection 2", icons: [.green, .red, .yellow]),
@@ -45,7 +45,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        AlternateAppIcon.Shelf(
+        AlternateAppIconShelf(
             collections: collections,
             context: context,
             onIconSelected: { print("Selected \($0.iconName)") }

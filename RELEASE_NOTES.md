@@ -1,6 +1,20 @@
 # Release Notes
 
 
+## 0.4
+
+### 💡 Adjustments
+
+* All `AlternateAppIcon` child types have been promoted to top-level types, for clarity.
+* All `AlternateAppIcon.Collection` is renamed to `AlternateAppIconCollection`.
+* All `AlternateAppIcon.Item` is renamed to `AlternateAppIconListItem`.
+* All `AlternateAppIconItem.Style` is renamed to `AlternateAppIconListItem.Style`.
+* All `AlternateAppIcon.Shelf` is renamed to `AlternateAppIconShelf`.
+* All `AlternateAppIcon.ShelfStyle` is renamed to `AlternateAppIconShelf.Style`.
+* The `AlternateAppIconShelf` view no longer requires you to specify a selection action.
+
+
+
 ## 0.3.1
 
 ### 💡 Adjustments

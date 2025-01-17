@@ -3,65 +3,62 @@
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2024-11-22.
-//  Copyright © 2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension AlternateAppIcon {
+/// This view lists alternate icon collections in a list
+/// of horizontally scrolling shelves.
+///
+/// The shelves will use ``AlternateAppIcon/Item`` views.
+/// You can style this component with the style modifier
+/// ``alternateAppIconShelfStyle(_:)``.
+///
+/// You can also apply a `.buttonStyle` to customize how
+/// each item button behaves.
+public struct AlternateAppIconShelf: View {
 
-    /// This view lists alternate icon collections in a list
-    /// of horizontally scrolling shelves.
+    /// Create an alternate app icon shelves view.
     ///
-    /// The shelves will use ``AlternateAppIcon/Item`` views.
-    /// You can style this component with the style modifier
-    /// ``alternateAppIconShelfStyle(_:)``.
-    ///
-    /// You can also apply a `.buttonStyle` to customize how
-    /// each item button behaves.
-    struct Shelf: View {
+    /// - Parameters:
+    ///   - collections: The collections to display as shelves.
+    ///   - context: The icon context to affect.
+    ///   - onIconSelected: An extra action to trigger when an icon is selected.
+    public init(
+        collections: [AlternateAppIconCollection],
+        context: AlternateAppIconContext,
+        onIconSelected: @escaping (AlternateAppIcon) -> Void
+    ) {
+        self.collections = collections
+        self.context = context
+        self.onIconSelected = onIconSelected
+    }
 
-        /// Create an alternate app icon shelves view.
-        ///
-        /// - Parameters:
-        ///   - collections: The collections to display as shelves.
-        ///   - context: The icon context to affect.
-        ///   - onIconSelected: An extra action to trigger when an icon is selected.
-        public init(
-            collections: [AlternateAppIcon.Collection],
-            context: AlternateAppIconContext,
-            onIconSelected: @escaping (AlternateAppIcon) -> Void
-        ) {
-            self.collections = collections
-            self.context = context
-            self.onIconSelected = onIconSelected
-        }
+    private let collections: [AlternateAppIconCollection]
+    private let onIconSelected: (AlternateAppIcon) -> Void
 
-        private let collections: [AlternateAppIcon.Collection]
-        private let onIconSelected: (AlternateAppIcon) -> Void
+    @Environment(\.alternateAppIconShelfStyle)
+    private var style
 
-        @Environment(\.alternateAppIconShelfStyle)
-        private var style
+    @ObservedObject
+    private var context: AlternateAppIconContext
 
-        @ObservedObject
-        private var context: AlternateAppIconContext
-
-        public var body: some View {
-            ScrollView(.vertical) {
-                LazyVStack(spacing: style.sectionSpacing) {
-                    ForEach(Array(collections.enumerated()), id: \.offset) { section in
-                        VStack(alignment: .leading, spacing: style.sectionTitleSpacing) {
-                            shelfTitle(for: section.element)
-                            shelf(for: section.element)
-                        }
+    public var body: some View {
+        ScrollView(.vertical) {
+            LazyVStack(spacing: style.sectionSpacing) {
+                ForEach(Array(collections.enumerated()), id: \.offset) { section in
+                    VStack(alignment: .leading, spacing: style.sectionTitleSpacing) {
+                        shelfTitle(for: section.element)
+                        shelf(for: section.element)
                     }
                 }
-                .padding(.vertical, style.scrollPadding)
             }
-            .withHiddenScrollContent()
-            .background(style.backgroundColor)
-            .alternateAppIconItemStyle(style.itemStyle)
+            .padding(.vertical, style.scrollPadding)
         }
+        .withHiddenScrollContent()
+        .background(style.backgroundColor)
+        .alternateAppIconListItemStyle(style.itemStyle)
     }
 }
 
@@ -76,9 +73,9 @@ private extension View {
     }
 }
 
-private extension AlternateAppIcon.Shelf {
+private extension AlternateAppIconShelf {
 
-    func shelf(for collection: AlternateAppIcon.Collection) -> some View {
+    func shelf(for collection: AlternateAppIconCollection) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: style.itemSpacing) {
                 ForEach(Array(collection.icons.enumerated()), id: \.offset) {
@@ -94,14 +91,14 @@ private extension AlternateAppIcon.Shelf {
         Button {
             selectIcon(icon)
         } label: {
-            AlternateAppIcon.Item(
+            AlternateAppIconListItem(
                 icon: icon,
                 isSelected: context.alternateAppIconName == icon.iconName
             )
         }
     }
 
-    func shelfTitle(for collection: AlternateAppIcon.Collection) -> some View {
+    func shelfTitle(for collection: AlternateAppIconCollection) -> some View {
         Text(collection.name)
             .font(.footnote)
             .textCase(.uppercase)
@@ -111,7 +108,7 @@ private extension AlternateAppIcon.Shelf {
     }
 }
 
-private extension AlternateAppIcon.Shelf {
+private extension AlternateAppIconShelf {
 
     func selectIcon(_ icon: AlternateAppIcon) {
         withAnimation {
@@ -121,10 +118,10 @@ private extension AlternateAppIcon.Shelf {
     }
 }
 
-public extension AlternateAppIcon {
+public extension AlternateAppIconShelf {
 
-    /// This style can style a ``AlternateAppIcon/Shelf``.
-    struct ShelfStyle: Sendable {
+    /// This style can style a ``AlternateAppIconShelf``.
+    struct Style: Sendable {
 
         /// Create a custom style.
         ///
@@ -141,7 +138,7 @@ public extension AlternateAppIcon {
             sectionSpacing: Double = 40,
             sectionTitleSpacing: Double = 10,
             sectionPadding: CGFloat? = nil,
-            itemStyle: ItemStyle = .standard,
+            itemStyle: AlternateAppIconListItem.Style = .standard,
             itemSpacing: Double = 16,
             backgroundColor: Color = .primary.opacity(0.05)
         ) {
@@ -158,13 +155,13 @@ public extension AlternateAppIcon {
         public var sectionSpacing: Double
         public var sectionTitleSpacing: Double
         public var sectionPadding: CGFloat?
-        public var itemStyle: ItemStyle
+        public var itemStyle: AlternateAppIconListItem.Style
         public var itemSpacing: Double
         public var backgroundColor: Color
     }
 }
 
-public extension AlternateAppIcon.ShelfStyle {
+public extension AlternateAppIconShelf.Style {
 
     /// The standard alternate app icon item style.
     static var standard: Self { .init() }
@@ -172,9 +169,9 @@ public extension AlternateAppIcon.ShelfStyle {
 
 public extension View {
 
-    /// Apply a ``AlternateAppIcon/ShelfStyle``.
+    /// Apply a ``AlternateAppIconShelf/Style``.
     func alternateAppIconShelfStyle(
-        _ style: AlternateAppIcon.ShelfStyle
+        _ style: AlternateAppIconShelf.Style
     ) -> some View {
         self.environment(\.alternateAppIconShelfStyle, style)
     }
@@ -182,8 +179,8 @@ public extension View {
 
 public extension EnvironmentValues {
 
-    /// Apply a ``AlternateAppIcon/ShelfStyle``.
-    @Entry var alternateAppIconShelfStyle = AlternateAppIcon.ShelfStyle.standard
+    /// Apply a ``AlternateAppIconShelf/Style``.
+    @Entry var alternateAppIconShelfStyle = AlternateAppIconShelf.Style.standard
 }
 
 #Preview {
@@ -206,10 +203,10 @@ public extension EnvironmentValues {
 
         @StateObject var context = AlternateAppIconContext()
 
-        let collections: [AlternateAppIcon.Collection]
+        let collections: [AlternateAppIconCollection]
 
         var body: some View {
-            AlternateAppIcon.Shelf(
+            AlternateAppIconShelf(
                 collections: collections,
                 context: context
             ) { icon in
