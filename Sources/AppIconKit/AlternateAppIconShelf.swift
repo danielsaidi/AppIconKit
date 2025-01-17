@@ -24,11 +24,11 @@ public struct AlternateAppIconShelf: View {
     /// - Parameters:
     ///   - collections: The collections to display as shelves.
     ///   - context: The icon context to affect.
-    ///   - onIconSelected: An extra action to trigger when an icon is selected.
+    ///   - onIconSelected: An extra action to trigger when an icon is selected, if any.
     public init(
         collections: [AlternateAppIconCollection],
         context: AlternateAppIconContext,
-        onIconSelected: @escaping (AlternateAppIcon) -> Void
+        onIconSelected: @escaping (AlternateAppIcon) -> Void = { _ in }
     ) {
         self.collections = collections
         self.context = context
