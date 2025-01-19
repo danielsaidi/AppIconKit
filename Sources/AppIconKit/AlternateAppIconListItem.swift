@@ -26,7 +26,7 @@ public struct AlternateAppIconListItem: View {
     ) {
         self.init(
             icon: icon.icon,
-            iconName: icon.iconName,
+            iconName: icon.appIconName,
             isSelected: isSelected
         )
     }

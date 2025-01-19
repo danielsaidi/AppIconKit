@@ -9,29 +9,30 @@
 import SwiftUI
 
 /// This model represents an alternate app icon, wich can be
-/// set to both list and set alternate app icons.
+/// used to both list and set alternate app icons.
 ///
-/// The `icon` is the icon asset to display, while `iconName`
-/// is the name of the icon to set when the icon is selected.
-/// You can make set `iconName` to nil to reset the app icon.
+/// The `icon` parameter is the `.imageset` to display while
+/// `appIconName` should refer to the `.appiconset` asset to
+/// set when the icon is selected. If `appIconName` is `nil`,
+/// the icon will reset the alternate app icon.
 public struct AlternateAppIcon {
 
     /// Create an alternate app icon value.
     ///
     /// - Parameters:
     ///   - icon: The icon asset to display.
-    ///   - iconName: The name of the alternate icon, if any.
+    ///   - appIconName: The name of the `.appiconset` asset, if any.
     public init(
         icon: Image,
-        iconName: String?
+        appIconName: String?
     ) {
         self.icon = icon
-        self.iconName = iconName
+        self.appIconName = appIconName
     }
 
     /// The icon asset to display.
     public let icon: Image
 
-    /// The name of the alternate icon, if any.
-    public let iconName: String?
+    /// The name of the `.appiconset` asset, if any.
+    public let appIconName: String?
 }

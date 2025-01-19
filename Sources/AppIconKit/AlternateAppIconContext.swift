@@ -39,7 +39,7 @@ public extension AlternateAppIconContext {
     func setAlternateAppIcon(
         _ icon: AlternateAppIcon
     ) {
-        setAlternateAppIconName(icon.iconName)
+        setAlternateAppIconName(icon.appIconName)
     }
 
     /// Set an alternate app icon with a certain name.

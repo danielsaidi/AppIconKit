@@ -1,6 +1,18 @@
 # Release Notes
 
 
+## 0.5
+
+### 💡 Adjustments
+
+* The `AlternateAppIconCollection` can now define a separate app icon prefix, which is needed for macOS.
+
+### 🚨 Breaking Changes
+
+* Due to the required alternate app icon adjustments, this version has some breaking changes. 
+
+
+
 ## 0.4
 
 ### 💡 Adjustments

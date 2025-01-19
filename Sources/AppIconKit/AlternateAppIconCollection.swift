@@ -25,34 +25,44 @@ public struct AlternateAppIconCollection {
         self.icons = icons
     }
     
-    /// Create an alternate app icon collection.
+    /// Create an alternate app icon collection by mapping a
+    /// set of icon names to ``AlternateAppIcon`` values.
     ///
-    /// This initializer will map the icon names to icon
-    /// values by prefixing each icon name with a prefix,
-    /// if any. Each icon name should be the name of the
-    /// icon file, without the prefix.
+    /// The `appIconName` should be the name of the main app
+    /// icon `.appiconset` asset that is used by default.
     ///
-    /// If a resulting app icon name equals `appIconName`,
-    /// the icon will reset the selection.
+    /// The `iconNames` array should be a list of plain icon
+    /// names, while `iconNamePrefix` is an icon name prefix
+    /// that will be added to the `.imageset` asset, and the
+    /// `appIconNamePrefix` to the `.appiconset` asset.
+    ///
+    /// If the resulting icon name equals `appIconName`, the
+    /// icon will reset the alternate app icon when selected.
     ///
     /// - Parameters:
     ///   - name: The name of the section.
     ///   - appIconName: The default app icon name.
-    ///   - iconNamePrefix: The prefix to add before each icon name.
-    ///   - iconNames: A list of icon names to add to the collection.
+    ///   - iconNames: A list of icon names.
+    ///   - imageNamePrefix: A prefix to add to the `.imageset` asset name.
+    ///   - appIconNamePrefix: A prefix to add to the `.appiconset` asset name.
     public init(
         name: LocalizedStringKey,
         appIconName: String,
-        iconNamePrefix: String = "",
-        iconNames: [String]
+        iconNames: [String],
+        imageNamePrefix: String = "",
+        appIconNamePrefix: String = ""
     ) {
         self.init(
             name: name,
             icons: iconNames.map {
-                let name = "\(iconNamePrefix)\($0)"
-                let isDefaultIcon = name == appIconName
-                let iconName = isDefaultIcon ? nil : name.replacingOccurrences(of: " ", with: "")
-                return .init(icon: Image(name), iconName: iconName)
+                let name = $0.replacingOccurrences(of: " ", with: "")
+                let imageName = "\(imageNamePrefix)\(name)"
+                let isDefaultIcon = imageName == appIconName
+                let appIconName = isDefaultIcon ? nil : "\(appIconNamePrefix)\(name)"
+                return .init(
+                    icon: Image(imageName),
+                    appIconName: appIconName
+                )
             }
         )
     }
