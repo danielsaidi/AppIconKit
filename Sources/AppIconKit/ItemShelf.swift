@@ -46,7 +46,6 @@ public struct ItemShelf<ItemType: Identifiable, ItemView: View>: View {
         }
         .withHiddenScrollContent()
         .background(style.backgroundColor)
-        .alternateAppIconListItemStyle(style.itemStyle)
     }
 }
 
@@ -70,7 +69,7 @@ private extension ItemShelf {
             .textCase(.uppercase)
             .foregroundColor(.secondary)
             .padding(.horizontal, style.sectionPadding)
-            .padding(.horizontal, 0.1 * style.itemStyle.iconSize)
+            .padding(.horizontal, 10)
     }
 }
 
@@ -117,7 +116,6 @@ public struct ItemShelfStyle: Sendable {
         sectionSpacing: Double = 40,
         sectionTitleSpacing: Double = 10,
         sectionPadding: CGFloat? = nil,
-        itemStyle: AlternateAppIconListItem.Style = .standard,
         itemSpacing: Double = 16,
         backgroundColor: Color = .primary.opacity(0.05)
     ) {
@@ -125,7 +123,6 @@ public struct ItemShelfStyle: Sendable {
         self.sectionSpacing = sectionSpacing
         self.sectionTitleSpacing = sectionTitleSpacing
         self.sectionPadding = sectionPadding
-        self.itemStyle = itemStyle
         self.itemSpacing = itemSpacing
         self.backgroundColor = backgroundColor
     }
@@ -134,7 +131,6 @@ public struct ItemShelfStyle: Sendable {
     public var sectionSpacing: Double
     public var sectionTitleSpacing: Double
     public var sectionPadding: CGFloat?
-    public var itemStyle: AlternateAppIconListItem.Style
     public var itemSpacing: Double
     public var backgroundColor: Color
 }

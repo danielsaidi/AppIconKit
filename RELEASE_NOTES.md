@@ -1,6 +1,22 @@
 # Release Notes
 
 
+## 0.6
+
+### ✨ Features
+
+* The new `ItemShelf` and its related types let you design other shelves like the `AlternateAppIconShelf`. 
+
+### 💡 Adjustments
+
+* The `AlternateAppIconCollection` view now uses `ItemShelf` under the hood.
+
+### 🚨 Breaking Changes
+
+* Since `ItemShelfStyle` has no icon style, you must now apply a `.alternateAppIconListItemStyle` to style icons.  
+
+
+
 ## 0.5
 
 ### 💡 Adjustments

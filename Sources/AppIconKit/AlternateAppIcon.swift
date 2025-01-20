@@ -15,7 +15,7 @@ import SwiftUI
 /// `appIconName` should refer to the `.appiconset` asset to
 /// set when the icon is selected. If `appIconName` is `nil`,
 /// the icon will reset the alternate app icon.
-public struct AlternateAppIcon {
+public struct AlternateAppIcon: Identifiable {
 
     /// Create an alternate app icon value.
     ///
@@ -29,6 +29,9 @@ public struct AlternateAppIcon {
         self.icon = icon
         self.appIconName = appIconName
     }
+    
+    /// The unique icon ID.
+    public var id: String { appIconName ?? "app" }
 
     /// The icon asset to display.
     public let icon: Image
