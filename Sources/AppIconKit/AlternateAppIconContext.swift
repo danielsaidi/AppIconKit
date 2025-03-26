@@ -58,11 +58,3 @@ public extension AlternateAppIconContext {
         #endif
     }
 }
-
-public extension AlternateAppIconContext {
-    
-    @available(*, deprecated, message: "This function no longer takes an icon.")
-    func resetAlternateAppIcon(_ icon: AlternateAppIcon) {
-        resetAlternateAppIcon()
-    }
-}

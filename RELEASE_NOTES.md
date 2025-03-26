@@ -3,7 +3,7 @@
 
 ## 0.7
 
-This version removes previously deprecated code.
+This version removes previously deprecated code and adds DocC documentation to the package.
 
 
 
