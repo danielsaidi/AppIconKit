@@ -5,15 +5,14 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/AppIconKit?color=%2300550&sort=semver" alt="Version" title="Version" />
     <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.0" />
+        <a href="https://danielsaidi.github.io/AppIconKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/AppIconKit" alt="MIT License" title="MIT License" />
-    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
-    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
-## About AppIconKit
+# AppIconKit
 
-AppIconKit helps you manage alternate app icons on both macOS and iOS.
+AppIconKit is a Swift SDK that helps you manage alternate app icons on macOS and iOS.
 
 
 
@@ -34,7 +33,7 @@ AppIconKit helps you manage alternate app icons on both macOS and iOS.
 The SDK has a couple of central types:
 
 * Use `AlternateAppIcon` to create alternate icon values for your app.
-* Use `AlternateAppIconContext` to keep track of and affect the current icon. 
+* Use `AlternateAppIconContext` to set and keep track of the current icon. 
 * Use `AlternateAppIconCollection` to group icons into related collections.
 * Use `AlternateAppIconListItem` when listing an app icon in lits and grids.
 * Use `AlternateAppIconShelf` to list app icons in a vertical list of horizontal shelves.
@@ -45,10 +44,10 @@ You can easily create a `LazyVGrid` picker with icons, or use an `AlternateAppIc
     <img src="/Resources/device.png" alt="Screenshot" width=350 />
 </p>
 
-You can also use the context's `setAlternateAppIcon(...)` to set an icon with code.
+The `AlternateAppIconContext` will automatically restore the icon on macOS, when a context instance is created.  
 
 > [!IMPORTANT]  
-> Make sure to enable `Include All App Icon Assets` in the app's Info.plist for the app to be able to select icons. Also note that you must add both an `.imageset` and an `.appiconset` for each icon, since SwiftUI can't render `.appiconset`.   
+> Make sure to enable `Include All App Icon Assets` in the app Info.plist for the app to be able to pick icons. You must add an `.imageset` and an `.appiconset` for each icon, since SwiftUI can't render `.appiconset`s and the OS can't use `.imageset`s as app icon.   
 
 
 
@@ -58,9 +57,9 @@ This library will get a proper documentation once it gets more than 100 stars.
 
 
 
-## Demo app
+## Demo Application
 
-The demo app lets you explore the library. To try it out, just open and run the `Demo` project.
+The `Demo` folder has a demo app that lets you explore the library and try changing the app icon.
 
 
 
@@ -77,9 +76,9 @@ Your support makes it possible for me to put more work into these projects and m
 Feel free to reach out if you have questions or want to contribute in any way:
 
 * Website: [danielsaidi.com][Website]
-* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
-* Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
+* Bluesky: [@danielsaidi@bsky.social][Bluesky]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
 
@@ -93,6 +92,7 @@ AppIconKit is available under the MIT license. See the [LICENSE][License] file f
 
 [Website]: https://danielsaidi.com
 [GitHub]: https://github.com/danielsaidi
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
 [Twitter]: https://twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [OpenSource]: https://danielsaidi.com/opensource
