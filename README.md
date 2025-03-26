@@ -5,7 +5,8 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/AppIconKit?color=%2300550&sort=semver" alt="Version" title="Version" />
     <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.0" />
-        <a href="https://danielsaidi.github.io/AppIconKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
+    <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
+    <a href="https://danielsaidi.github.io/AppIconKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/AppIconKit" alt="MIT License" title="MIT License" />
 </p>
 
