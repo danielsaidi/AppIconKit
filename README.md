@@ -53,7 +53,7 @@ The `AlternateAppIconContext` will automatically restore the icon on macOS, when
 
 ## Documentation
 
-This library will get a proper documentation once it gets more than 100 stars. 
+The online [documentation][Documentation] has more information, articles, code examples, etc. 
 
 
 

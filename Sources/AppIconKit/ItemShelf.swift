@@ -84,6 +84,7 @@ private extension View {
     }
 }
 
+/// This type can be used to define an item shelf section.
 public struct ItemShelfSection<ItemType: Identifiable> {
     
     public init(
@@ -98,7 +99,10 @@ public struct ItemShelfSection<ItemType: Identifiable> {
     public let items: [ItemType]
 }
 
-/// This style can style an ``IconShelf``.
+/// This style can be used to style ``ItemShelf`` views.
+///
+/// You can apply custom style values with the view modifier
+/// ``SwiftUICore/View/itemShelfStyle(_:)``.
 public struct ItemShelfStyle: Sendable {
 
     /// Create a custom style.
@@ -108,7 +112,6 @@ public struct ItemShelfStyle: Sendable {
     ///   - sectionSpacing: The spacing between sections, by default `40`.
     ///   - sectionTitleSpacing: The spacing between section title and items, by default `10`.
     ///   - sectionPadding: The horizontal padding of each section, by default `nil`.
-    ///   - itemStyle: The item style, by default `.standard`.
     ///   - itemSpacing: The spacing between items, by default `16`.
     ///   - backgroundColor: The shelf background color.
     public init(
@@ -153,6 +156,6 @@ public extension View {
 
 public extension EnvironmentValues {
 
-    /// Apply a ``ItemShelfStyle/Style``.
+    /// Apply a ``ItemShelfStyle``.
     @Entry var itemShelfStyle = ItemShelfStyle.standard
 }

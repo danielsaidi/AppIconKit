@@ -1,6 +1,12 @@
 # Release Notes
 
 
+## 0.7
+
+This version removes previously deprecated code.
+
+
+
 ## 0.6
 
 ### ✨ Features
