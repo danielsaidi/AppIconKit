@@ -21,6 +21,11 @@ https://github.com/danielsaidi/AppIconKit.git
 ```
 
 
+## Support My Work
+
+By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource].
+
+
 
 ## Getting Started
 
@@ -64,8 +69,16 @@ AppIconKit is available under the MIT license.
 - ``AlternateAppIconShelf``
 
 
-### Item Shel
+### Item Shelf
 
 - ``ItemShelf``
 - ``ItemShelfSection``
 - ``ItemShelfStyle``
+
+
+
+[Email]: mailto:daniel.saidi@gmail.com
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
+[Sponsors]: https://github.com/sponsors/danielsaidi

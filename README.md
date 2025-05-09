@@ -7,7 +7,8 @@
     <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.0" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/AppIconKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <img src="https://img.shields.io/github/license/danielsaidi/AppIconKit" alt="MIT License" title="MIT License" />
+    <a href="https://github.com/danielsaidi/AppIconKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/AppIconKit" alt="MIT License" /></a>
+    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
@@ -28,6 +29,13 @@ AppIconKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/AppIconKit.git
 ```
+
+
+## Support My Work
+
+By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource]. 
+
+Every sponsor makes a real difference. Thank you for considering [supporting my work][Sponsors]!
 
 
 
@@ -62,14 +70,6 @@ The `Demo` folder has a demo app that lets you explore the library and try chang
 
 
 
-## Support my work 
-
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
-
-Your support makes it possible for me to put more work into these projects and make them the best they can be.
-
-
-
 ## Contact
 
 Feel free to reach out if you have questions or want to contribute in any way:
@@ -88,16 +88,15 @@ AppIconKit is available under the MIT license. See the [LICENSE][License] file f
 
 
 [Email]: mailto:daniel.saidi@gmail.com
-
 [Website]: https://danielsaidi.com
 [GitHub]: https://github.com/danielsaidi
-[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
-[Twitter]: https://twitter.com/danielsaidi
-[Mastodon]: https://mastodon.social/@danielsaidi
 [OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
+[Mastodon]: https://mastodon.social/@danielsaidi
+[Twitter]: https://twitter.com/danielsaidi
+
 [Documentation]: https://danielsaidi.github.io/AppIconKit
 [Getting-Started]: https://danielsaidi.github.io/AppIconKit/documentation/appiconkit/getting-started
-
 [License]: https://github.com/danielsaidi/AppIconKit/blob/master/LICENSE
