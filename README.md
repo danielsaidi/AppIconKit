@@ -33,9 +33,7 @@ https://github.com/danielsaidi/AppIconKit.git
 
 ## Support My Work
 
-By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource]. 
-
-Every sponsor makes a real difference. Thank you for considering [supporting my work][Sponsors]!
+By [becoming a sponsor][Sponsors], you directly support the development & improvement of my various [open-source projects][OpenSource].
 
 
 
