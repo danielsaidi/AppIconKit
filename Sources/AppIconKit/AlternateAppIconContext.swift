@@ -17,7 +17,7 @@ open class AlternateAppIconContext: NSObject, ObservableObject {
     /// Create an alternate app icon context instance.
     public override init() {
         super.init()
-        #if os(macOS)
+        #if os(macOS) || targetEnvironment(macCatalyst)
         guard let alternateAppIconName else { return }
         setAlternateAppIconName(alternateAppIconName)
         #endif
