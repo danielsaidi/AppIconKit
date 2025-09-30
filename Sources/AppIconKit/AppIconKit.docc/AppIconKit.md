@@ -33,11 +33,13 @@ AppIconKit helps you manage alternate app icons on both macOS and iOS.
 
 The SDK has a couple of central types:
 
-* Use ``AlternateAppIcon`` to create alternate icon values for your app.
+* Use ``AlternateAppIcon`` to create alternate icons for your app.
 * Use ``AlternateAppIconContext`` to set and keep track of the current icon. 
 * Use ``AlternateAppIconCollection`` to group icons into related collections.
 * Use ``AlternateAppIconListItem`` when listing an app icon in lits and grids.
 * Use ``AlternateAppIconShelf`` to list app icons in a vertical list of horizontal shelves.
+
+You can use the ``AlternateAppIcon`` to set and reset the current icon if you don't need to show the selection in the app. Otherwise, use the context to keep track of the current selection.  
 
 The context will automatically restore the icon on macOS, when a context instance is created.  
 

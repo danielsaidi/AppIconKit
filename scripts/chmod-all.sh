@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script makes all .sh files in the current directory executable."
+    echo "This script runs chmod +x on all .sh files in the current directory."
 
     echo
     echo "Usage: $0 [OPTIONS]"
@@ -15,7 +15,6 @@ show_usage() {
     echo
     echo "Examples:"
     echo "  $0"
-    echo "  bash scripts/chmod.sh"
     echo
 }
 
@@ -60,19 +59,19 @@ make_executable() {
 echo
 echo "Making all .sh files in $(basename "$FOLDER") executable..."
 
-# Find all .sh files in the FOLDER except chmod.sh and make them executable
+# Find all .sh files in the FOLDER and make them executable
 SCRIPT_COUNT=0
 while read -r script; do
     if ! make_executable "$script"; then
         exit 1
     fi
     ((SCRIPT_COUNT++))
-done < <(find "$FOLDER" -name "*.sh" ! -name "chmod.sh" -type f)
+done < <(find "$FOLDER" -name "*.sh" ! -name "chmod-all.sh" -type f)
 
 # Complete successfully
 if [ $SCRIPT_COUNT -eq 0 ]; then
     echo
-    echo "No .sh files found to make executable (excluding chmod.sh)"
+    echo "No .sh files found to make executable"
 else
     echo
     echo "Successfully made $SCRIPT_COUNT script(s) executable!"

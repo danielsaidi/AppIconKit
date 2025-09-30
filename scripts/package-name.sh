@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script returns the latest project version."
+    echo "This script finds the main package name."
 
     echo
     echo "Usage: $0 [OPTIONS]"
@@ -15,7 +15,6 @@ show_usage() {
     echo
     echo "Examples:"
     echo "  $0"
-    echo "  bash scripts/version_number.sh"
     echo
 }
 
@@ -41,25 +40,21 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-# Check if the current directory is a Git repository
-if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    show_error_and_exit "Not a Git repository"
+# Check that a Package.swift file exists
+if [ ! -f "Package.swift" ]; then
+    show_error_and_exit "Package.swift not found in current directory"
 fi
 
-# Fetch all tags
-if ! git fetch --tags > /dev/null 2>&1; then
-    show_error_and_exit "Failed to fetch tags from remote"
+# Using grep and sed to extract the package name
+# 1. grep finds the line containing "name:"
+# 2. sed extracts the text between quotes
+if ! package_name=$(grep -m 1 'name:.*"' Package.swift | sed -n 's/.*name:[[:space:]]*"\([^"]*\)".*/\1/p'); then
+    show_error_and_exit "Could not find package name in Package.swift"
 fi
 
-# Get the latest semver tag
-if ! latest_version=$(git tag -l --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1); then
-    show_error_and_exit "Failed to retrieve version tags"
+if [ -z "$package_name" ]; then
+    show_error_and_exit "Could not find package name in Package.swift"
 fi
 
-# Check if we found a version tag
-if [ -z "$latest_version" ]; then
-    show_error_and_exit "No semver tags found in this repository"
-fi
-
-# Print the latest version
-echo "$latest_version"
+# Output the package name
+echo "$package_name"

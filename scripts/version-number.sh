@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script outputs the default git branch name."
+    echo "This script returns the latest project version."
 
     echo
     echo "Usage: $0 [OPTIONS]"
@@ -15,7 +15,6 @@ show_usage() {
     echo
     echo "Examples:"
     echo "  $0"
-    echo "  bash scripts/git_default_branch.sh"
     echo
 }
 
@@ -41,11 +40,25 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-# Get the default git branch name
-if ! BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); then
-    echo "Failed to get default git branch"
-    exit 1
+# Check if the current directory is a Git repository
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    show_error_and_exit "Not a Git repository"
 fi
 
-# Output the branch name
-echo $BRANCH
+# Fetch all tags
+if ! git fetch --tags > /dev/null 2>&1; then
+    show_error_and_exit "Failed to fetch tags from remote"
+fi
+
+# Get the latest semver tag
+if ! latest_version=$(git tag -l --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1); then
+    show_error_and_exit "Failed to retrieve version tags"
+fi
+
+# Check if we found a version tag
+if [ -z "$latest_version" ]; then
+    show_error_and_exit "No semver tags found in this repository"
+fi
+
+# Print the latest version
+echo "$latest_version"

@@ -10,6 +10,7 @@ set -o pipefail
 show_usage() {
     echo
     echo "This script builds DocC for a <TARGET> and certain <PLATFORMS>."
+    echo "Unlike the 'docc' script, this scripts combines DocC for all platform into a single output."
 
     echo
     echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [--hosting-base-path <PATH>]"
@@ -18,7 +19,7 @@ show_usage() {
     echo "  --hosting-base-path   Optional. Base path for static hosting (default: TARGET name, use empty string \"\" for root)"
 
     echo
-    echo "The web transformed documentation ends up in .build/docs-<PLATFORM>."
+    echo "The web transformed documentation ends up in .build/docc."
 
     echo
     echo "Examples:"
@@ -45,6 +46,10 @@ show_error_and_exit() {
 TARGET=""
 PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 HOSTING_BASE_PATH=""  # Will be set to TARGET if not specified
+
+# Define paths
+SYMBOL_GRAPHS_DIR=".build/symbol-graphs"
+DOCC_OUTPUT_DIR=".build/docc"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -144,32 +149,14 @@ build_platform() {
 
     # Build $TARGET docs for the $PLATFORM
     echo "Building $TARGET docs for $PLATFORM..."
-    if ! xcodebuild docbuild -scheme $TARGET -derivedDataPath .build/docbuild -destination "generic/platform=$PLATFORM"; then
+    if ! xcodebuild  \
+        -scheme $TARGET \
+        -derivedDataPath .build/.deriveddata \
+        -destination "generic/platform=$PLATFORM" \
+        OTHER_SWIFT_FLAGS="-emit-symbol-graph -emit-symbol-graph-dir $SYMBOL_GRAPHS_DIR/$PLATFORM"; then
         echo "Failed to build documentation for $PLATFORM"
         return 1
     fi
-
-    # Transform docs for static hosting with configurable base path
-    local DOCC_COMMAND="$(xcrun --find docc) process-archive transform-for-static-hosting .build/docbuild/Build/Products/$DEBUG_PATH/$TARGET.doccarchive --output-path .build/docs-$PLATFORM"
-
-    # Add hosting-base-path only if it's not empty
-    if [ -n "$HOSTING_BASE_PATH" ]; then
-        DOCC_COMMAND="$DOCC_COMMAND --hosting-base-path \"$HOSTING_BASE_PATH\""
-        echo "Using hosting base path: '$HOSTING_BASE_PATH'"
-    else
-        echo "Using empty hosting base path (root level)"
-    fi
-
-    if ! eval "$DOCC_COMMAND"; then
-        echo "Failed to transform documentation for $PLATFORM"
-        return 1
-    fi
-
-    # Inject a root redirect script on the root page
-    echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > .build/docs-$PLATFORM/index.html;
-
-    # Complete successfully
-    echo "Successfully built $TARGET docs for $PLATFORM"
 }
 
 # Start script
@@ -187,6 +174,19 @@ for PLATFORM in $PLATFORMS; do
         exit 1
     fi
 done
+
+# Create a .doccarchive from the symbols.
+$(xcrun --find docc) convert "Sources/$TARGET/$TARGET.docc" \
+    --emit-lmdb-index \
+    --fallback-display-name "$TARGET" \
+    --fallback-bundle-identifier "$TARGET" \
+    --fallback-bundle-version 0 \
+    --output-dir "$DOCC_OUTPUT_DIR" \
+    --additional-symbol-graph-dir "$SYMBOL_GRAPHS_DIR" \
+    --hosting-base-path "$HOSTING_BASE_PATH"
+
+# Inject a root redirect script on the root page
+echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > $DOCC_OUTPUT_DIR/index.html;
 
 # Complete successfully
 echo
