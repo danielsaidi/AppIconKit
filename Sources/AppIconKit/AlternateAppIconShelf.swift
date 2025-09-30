@@ -10,12 +10,8 @@ import SwiftUI
 
 /// This shelf lists icons in horizontally scrolling shelves.
 ///
-/// This view uses ``AlternateAppIcon/Item`` item views. You
-/// can style this component and its views with the modifier
-/// ``alternateAppIconShelfStyle(_:)``.
-///
-/// You can also apply a `.buttonStyle` to customize how the
-/// item buttons behave.
+/// You can style the view with ``alternateAppIconShelfStyle(_:)`` and
+/// apply a `.buttonStyle` to style the various item buttons.
 public struct AlternateAppIconShelf: View {
 
     /// Create an alternate app icon shelves view.

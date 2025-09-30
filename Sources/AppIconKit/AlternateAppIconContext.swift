@@ -9,8 +9,7 @@
 import Foundation
 import SwiftUI
 
-/// This observable context class can be used to managed the
-/// alternate app icon for an iOS or macOS app.
+/// This observable context class can be used to managed the alternate app icon.
 @MainActor
 public class AlternateAppIconContext: ObservableObject {
 

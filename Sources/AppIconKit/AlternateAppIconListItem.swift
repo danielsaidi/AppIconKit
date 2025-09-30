@@ -8,11 +8,9 @@
 
 import SwiftUI
 
-/// This view can be used to list alternate app icons in
-/// a list or grid.
+/// This view can be used to list alternate app icons in a list or grid.
 ///
-/// You can style this component with the style modifier
-/// ``SwiftUICore/View/alternateAppIconListItemStyle(_:)``.
+/// You can style the view with ``alternateAppIconListItemStyle(_:)``.
 public struct AlternateAppIconListItem: View {
 
     /// Create an alternate icon list item.
