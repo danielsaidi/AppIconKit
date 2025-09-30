@@ -20,18 +20,24 @@ public struct AlternateAppIcon: Identifiable {
     /// Create an alternate app icon value.
     ///
     /// - Parameters:
+    ///   - name: The icon name.
     ///   - icon: The icon asset to display.
     ///   - appIconName: The name of the `.appiconset` asset, if any.
     public init(
+        name: String,
         icon: Image,
         appIconName: String?
     ) {
+        self.name = name
         self.icon = icon
         self.appIconName = appIconName
     }
     
     /// The unique icon ID.
     public var id: String { appIconName ?? "app" }
+
+    /// The icon name.
+    public let name: String
 
     /// The icon asset to display.
     public let icon: Image

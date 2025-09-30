@@ -57,6 +57,7 @@ public struct AlternateAppIconCollection {
                 let isDefaultIcon = imageName == appIconName
                 let appIconName = isDefaultIcon ? nil : "\(appIconNamePrefix)\(name)"
                 return .init(
+                    name: imageName,
                     icon: Image(imageName),
                     appIconName: appIconName
                 )
