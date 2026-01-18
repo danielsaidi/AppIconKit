@@ -1,36 +1,88 @@
 #!/bin/bash
 
-# Documentation:
-# This script builds a <TARGET> for all provided <PLATFORMS>.
-# This script targets iOS, macOS, tvOS, watchOS, and xrOS by default.
-# You can pass in a list of <PLATFORMS> if you want to customize the build.
-
-# Usage:
-# build.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
-# e.g. `bash scripts/build.sh MyTarget iOS macOS`
-
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Verify that all required arguments are provided
-if [ $# -eq 0 ]; then
-    echo "Error: This script requires at least one argument"
-    echo "Usage: $0 <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
-    echo "For instance: $0 MyTarget iOS macOS"
+# Function to display usage information
+show_usage() {
+    echo
+    echo "This script builds a <TARGET> for all provided <PLATFORMS>."
+
+    echo
+    echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...]"
+    echo "  [TARGET]              Optional. The target to build (defaults to package name)"
+    echo "  -p, --platforms       Optional. List of platforms (default: iOS macOS tvOS watchOS xrOS)"
+    
+    echo
+    echo "Examples:"
+    echo "  $0"
+    echo "  $0 MyTarget"
+    echo "  $0 -p iOS macOS"
+    echo "  $0 MyTarget -p iOS macOS"
+    echo "  $0 MyTarget --platforms iOS macOS tvOS watchOS xrOS"
+    echo
+}
+
+# Function to display error message, show usage, and exit
+show_error_and_exit() {
+    echo
+    local error_message="$1"
+    echo "Error: $error_message"
+    show_usage
     exit 1
-fi
+}
 
 # Define argument variables
-TARGET=$1
+TARGET=""
+PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 
-# Remove TARGET from arguments list
-shift
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -p|--platforms)
+            shift  # Remove --platforms from arguments
+            PLATFORMS=""  # Clear default platforms
+            
+            # Collect all platform arguments until we hit another flag or run out of args
+            while [[ $# -gt 0 && ! "$1" =~ ^- ]]; do
+                PLATFORMS="$PLATFORMS $1"
+                shift
+            done
+            
+            # Remove leading space and check if we got any platforms
+            PLATFORMS=$(echo "$PLATFORMS" | sed 's/^ *//')
+            if [ -z "$PLATFORMS" ]; then
+                show_error_and_exit "--platforms requires at least one platform"
+            fi
+            ;;
+        -h|--help)
+            show_usage; exit 0 ;;
+        -*)
+            show_error_and_exit "Unknown option $1" ;;
+        *)
+            if [ -z "$TARGET" ]; then
+                TARGET="$1"
+            else
+                show_error_and_exit "Unexpected argument '$1'"
+            fi
+            shift
+            ;;
+    esac
+done
 
-# Define platforms variable
-if [ $# -eq 0 ]; then
-    set -- iOS macOS tvOS watchOS xrOS
+# If no TARGET was provided, try to get the package name
+if [ -z "$TARGET" ]; then
+    FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+    SCRIPT_PACKAGE_NAME="$FOLDER/package-name.sh"
+
+    if [ ! -f "$SCRIPT_PACKAGE_NAME" ]; then
+        show_error_and_exit "Script not found: $SCRIPT_PACKAGE_NAME"
+    fi
+
+    if ! TARGET=$("$SCRIPT_PACKAGE_NAME"); then
+        show_error_and_exit "Failed to get package name"
+    fi
 fi
-PLATFORMS=$@
 
 # A function that builds $TARGET for a specific platform
 build_platform() {
@@ -41,8 +93,7 @@ build_platform() {
     # Build $TARGET for the $PLATFORM
     echo "Building $TARGET for $PLATFORM..."
     if ! xcodebuild -scheme $TARGET -derivedDataPath .build -destination generic/platform=$PLATFORM; then
-        echo "Failed to build $TARGET for $PLATFORM"
-        return 1
+        echo "Failed to build $TARGET for $PLATFORM" ; return 1
     fi
 
     # Complete successfully
@@ -50,9 +101,8 @@ build_platform() {
 }
 
 # Start script
-echo ""
+echo
 echo "Building $TARGET for [$PLATFORMS]..."
-echo ""
 
 # Loop through all platforms and call the build function
 for PLATFORM in $PLATFORMS; do
@@ -62,6 +112,6 @@ for PLATFORM in $PLATFORMS; do
 done
 
 # Complete successfully
-echo ""
+echo
 echo "Building $TARGET completed successfully!"
-echo ""
+echo

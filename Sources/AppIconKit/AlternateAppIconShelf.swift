@@ -3,19 +3,15 @@
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2024-11-22.
-//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2026 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
 /// This shelf lists icons in horizontally scrolling shelves.
 ///
-/// This view uses ``AlternateAppIcon/Item`` item views. You
-/// can style this component and its views with the modifier
-/// ``alternateAppIconShelfStyle(_:)``.
-///
-/// You can also apply a `.buttonStyle` to customize how the
-/// item buttons behave.
+/// You can style the view with ``alternateAppIconShelfStyle(_:)`` and
+/// apply a `.buttonStyle` to style the various item buttons.
 public struct AlternateAppIconShelf: View {
 
     /// Create an alternate app icon shelves view.
@@ -102,9 +98,21 @@ public extension EnvironmentValues {
     struct Preview: View {
 
         init() {
-            let icon1 = AlternateAppIcon(icon: .init(.appIcon), appIconName: nil)
-            let icon2 = AlternateAppIcon(icon: .init(.appIcon), appIconName: "AppIcon2")
-            let icon3 = AlternateAppIcon(icon: .init(.appIcon), appIconName: "AppIcon3")
+            let icon1 = AlternateAppIcon(
+                name: "icon1",
+                icon: .init(.appIcon),
+                appIconName: nil
+            )
+            let icon2 = AlternateAppIcon(
+                name: "icon2",
+                icon: .init(.appIcon),
+                appIconName: "AppIcon2"
+            )
+            let icon3 = AlternateAppIcon(
+                name: "icon3",
+                icon: .init(.appIcon),
+                appIconName: "AppIcon3"
+            )
 
             self.collections = [
                 .init(name: "Section 1", icons: [icon1, icon2, icon3]),

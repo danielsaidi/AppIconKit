@@ -3,17 +3,15 @@
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2025-01-20.
-//  Copyright © 2025 Daniel Saidi. All rights reserved.
+//  Copyright © 2025-2026 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-/// This general shelf can be used to list any kind of items
-/// in horizontally scrolling shelves.
+/// This general shelf can be used to list items in horizontally scrolling shelves.
 ///
-/// This component is used by ``AlternateAppIconShelf``, and
-/// is exposed so that you can reuse it if an apps have more
-/// shels that should look the same.
+/// This component is used by ``AlternateAppIconShelf`` and is exposed
+/// so you can reuse it if an apps have more shelves that should look the same.
 public struct ItemShelf<ItemType: Identifiable, ItemView: View>: View {
     
     public init(

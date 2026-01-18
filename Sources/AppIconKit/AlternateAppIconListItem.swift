@@ -3,16 +3,14 @@
 //  AppIconKit
 //
 //  Created by Daniel Saidi on 2024-11-22.
-//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2026 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-/// This view can be used to list alternate app icons in
-/// a list or grid.
+/// This view can be used to list alternate app icons in a list or grid.
 ///
-/// You can style this component with the style modifier
-/// ``SwiftUICore/View/alternateAppIconListItemStyle(_:)``.
+/// You can style the view with ``alternateAppIconListItemStyle(_:)``.
 public struct AlternateAppIconListItem: View {
 
     /// Create an alternate icon list item.

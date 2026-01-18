@@ -1,6 +1,15 @@
 # Release Notes
 
 
+## 0.8
+
+### 💡 Adjustments
+
+* The package now uses Swift 6.1. 
+* The demo app now targets iOS 26. 
+
+
+
 ## 0.7
 
 This version removes previously deprecated code and adds DocC documentation to the package.
