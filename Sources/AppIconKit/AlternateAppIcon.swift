@@ -67,27 +67,35 @@ public extension AlternateAppIcon {
     ///
     /// - Parameters:
     ///   - name: The name of the `.appiconset` asset to set.
+    ///
+    /// - Returns: Whether the operation suceeded or not.
+    @discardableResult
     static func setCurrentIcon(
         named name: String?
-    ) {
+    ) -> Bool {
         #if targetEnvironment(macCatalyst)
         if let nsApplication = NSClassFromString("NSApplication") as? NSObject.Type,
            let shared = nsApplication.value(forKey: "sharedApplication") as? NSObject {
             if let name, let imagePerform = Bundle.main.perform(NSSelectorFromString("imageForResource:"), with: name), let image = imagePerform.takeUnretainedValue() as? NSObject {
                 shared.setValue(image, forKey: "applicationIconImage")
+                return true
             } else {
-                alternateAppIconName = nil
                 shared.setValue(nil, forKey: "applicationIconImage")
+                return false
             }
         }
-        #elseif os(iOS) || os(tvOS)
+        #elseif os(iOS) || os(tvOS) || os(visionOS)
         UIApplication.shared.setAlternateIconName(name)
+        return true
         #elseif os(macOS)
         if let name {
             NSApplication.shared.applicationIconImage = Bundle.main.image(forResource: name)
+            return true
         } else {
             NSApplication.shared.applicationIconImage = nil
+            return false
         }
         #endif
+        return false
     }
 }

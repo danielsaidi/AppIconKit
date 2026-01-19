@@ -3,8 +3,8 @@
 
 ## 0.9
 
-This version adds support for macOS Catalyst and icon logic
-directly to the `AlternateAppIcon` type. 
+This version adds support for macOS Catalyst and Vision Pro,
+and adds icon logic directly to the `AlternateAppIcon` type. 
 
 ### ✨ Features
 

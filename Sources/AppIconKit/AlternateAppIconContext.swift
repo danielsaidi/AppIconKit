@@ -15,10 +15,10 @@ import SwiftUI
 /// You can use the ``AlternateAppIcon`` directly instead if
 /// you don't need to show the selected icon within your app.
 @MainActor
-public final class AlternateAppIconContext: NSObject, ObservableObject {
+public final class AlternateAppIconContext: ObservableObject {
 
     /// Create a context instance.
-    public override init() {
+    public init() {
         #if os(macOS) || targetEnvironment(macCatalyst)
         guard let alternateAppIconName else { return }
         setAlternateAppIcon(named: alternateAppIconName)
@@ -56,7 +56,8 @@ public extension AlternateAppIconContext {
     func setAlternateAppIcon(
         named name: String?
     ) {
-        alternateAppIconName = name
-        AlternateAppIcon.setCurrentIcon(named: name)
+        if AlternateAppIcon.setCurrentIcon(named: name) {
+            alternateAppIconName = name
+        }
     }
 }
