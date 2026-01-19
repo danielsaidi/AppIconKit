@@ -53,24 +53,34 @@ public struct AlternateAppIcon: Identifiable {
 @MainActor
 public extension AlternateAppIcon {
 
-    /// Reset the alternate app icon.
-    static func reset() {
-        setAlternateAppIcon(named: nil)
+    /// Reset the current alternate app icon, if any.
+    static func resetCurrent() {
+        setCurrentIcon(named: nil)
     }
 
     /// Set the icon as the current alternate app icon.
-    func set() {
-        Self.setAlternateAppIcon(named: appIconName)
+    func setAsCurrent() {
+        Self.setCurrentIcon(named: appIconName)
     }
 
     /// Set an alternate app icon with a certain name.
     ///
     /// - Parameters:
     ///   - name: The name of the `.appiconset` asset to set.
-    static func setAlternateAppIcon(
+    static func setCurrentIcon(
         named name: String?
     ) {
-        #if os(iOS) || os(tvOS)
+        #if targetEnvironment(macCatalyst)
+        if let nsApplication = NSClassFromString("NSApplication") as? NSObject.Type,
+           let shared = nsApplication.value(forKey: "sharedApplication") as? NSObject {
+            if let name, let imagePerform = Bundle.main.perform(NSSelectorFromString("imageForResource:"), with: name), let image = imagePerform.takeUnretainedValue() as? NSObject {
+                shared.setValue(image, forKey: "applicationIconImage")
+            } else {
+                alternateAppIconName = nil
+                shared.setValue(nil, forKey: "applicationIconImage")
+            }
+        }
+        #elseif os(iOS) || os(tvOS)
         UIApplication.shared.setAlternateIconName(name)
         #elseif os(macOS)
         if let name {
@@ -80,5 +90,4 @@ public extension AlternateAppIcon {
         }
         #endif
     }
-
 }

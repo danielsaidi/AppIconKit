@@ -17,15 +17,15 @@ import SwiftUI
 @MainActor
 public final class AlternateAppIconContext: NSObject, ObservableObject {
 
-    /// Create an alternate app icon context instance.
-    public init() {
-        #if os(macOS)
+    /// Create a context instance.
+    public override init() {
+        #if os(macOS) || targetEnvironment(macCatalyst)
         guard let alternateAppIconName else { return }
-        setAlternateAppIconName(alternateAppIconName)
+        setAlternateAppIcon(named: alternateAppIconName)
         #endif
     }
 
-    /// The currently set alternate app icon name.
+    /// The current alternate app icon name, if any.
     @AppStorage("com.danielsaidi.appiconkit.alternateappiconname")
     public private(set) var alternateAppIconName: String?
 }
@@ -35,39 +35,28 @@ public extension AlternateAppIconContext {
     /// Reset the alternate app icon.
     func resetAlternateAppIcon() {
         guard alternateAppIconName != nil else { return }
-        setAlternateAppIconName(nil)
+        setAlternateAppIcon(named: nil)
     }
 
     /// Set a certain alternate app icon.
     func setAlternateAppIcon(
         _ icon: AlternateAppIcon
     ) {
-        setAlternateAppIconName(icon.appIconName)
+        setAlternateAppIcon(named: icon.appIconName)
     }
 
-    /// Set an alternate app icon with a certain name.
+    @available(*, deprecated, renamed: "setAlternateAppIcon(named:)")
     func setAlternateAppIconName(
         _ name: String?
     ) {
+        setAlternateAppIcon(named: name)
+    }
+
+    /// Set an alternate app icon with a certain name.
+    func setAlternateAppIcon(
+        named name: String?
+    ) {
         alternateAppIconName = name
-        #if targetEnvironment(macCatalyst)
-        if let nsApplication = NSClassFromString("NSApplication") as? NSObject.Type,
-           let shared = nsApplication.value(forKey: "sharedApplication") as? NSObject {
-            if let name, let imagePerform = Bundle.main.perform(NSSelectorFromString("imageForResource:"), with: name), let image = imagePerform.takeUnretainedValue() as? NSObject {
-                shared.setValue(image, forKey: "applicationIconImage")
-            } else {
-                alternateAppIconName = nil
-                shared.setValue(nil, forKey: "applicationIconImage")
-            }
-        }
-        #elseif os(iOS) || os(tvOS)
-        UIApplication.shared.setAlternateIconName(name)
-        #elseif os(macOS)
-        if let name {
-            NSApplication.shared.applicationIconImage = Bundle.main.image(forResource: name)
-        } else {
-            NSApplication.shared.applicationIconImage = nil
-        }
-        #endif
+        AlternateAppIcon.setCurrentIcon(named: name)
     }
 }

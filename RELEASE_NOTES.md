@@ -3,9 +3,13 @@
 
 ## 0.9
 
+This version adds support for macOS Catalyst and icon logic
+directly to the `AlternateAppIcon` type. 
+
 ### ✨ Features
 
-* `AlternateAppIcon` has new icon mutation functions. 
+* The SDK now supports macOS Catalyst.
+* The `AlternateAppIcon` type has new icon setters. 
 
 
 
