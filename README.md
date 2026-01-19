@@ -28,10 +28,6 @@ https://github.com/danielsaidi/AppIconKit.git
 ```
 
 
-## Support My Work
-
-Maintaining my various [open-source tools][OpenSource] takes significant time and effort. You can [become a sponsor][Sponsors] to help me dedicate more time to creating, maintaining, and improving these projects. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed. Thank you for considering!
-
 ## Getting Started
 
 AppIconKit helps you manage alternate app icons on both macOS and iOS.
