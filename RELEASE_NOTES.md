@@ -1,6 +1,14 @@
 # Release Notes
 
 
+## 0.9
+
+### ✨ Features
+
+* `AlternateAppIcon` has new icon mutation functions. 
+
+
+
 ## 0.8
 
 ### 💡 Adjustments

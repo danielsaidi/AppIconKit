@@ -10,11 +10,15 @@ import SwiftUI
 
 /// This model represents an alternate app icon.
 ///
-/// This model can be used to both list and set alternate app icons.
+/// This type can also be used to manage alternate app icons.
+/// Use the ``AlternateAppIconContext`` to observe the state
+/// in e.g. a SwiftUI app. Use this class if you do not need
+/// to show the currently selected icon.
 ///
-/// The ``icon`` parameter is the `.imageset` to show when displaying the
-/// icon, while the ``appIconName`` refers to the `.appiconset` asset that
-/// should be set when the icon is selected. A `nil` value should reset the icon.
+/// The ``icon`` property is the `.imageset` to use when the
+/// icon is listed in e.g. a picker, while the ``appIconName``
+/// is the name of the `.appiconset` to set when the icon is
+/// selected. A `nil` value should reset the icon.
 public struct AlternateAppIcon: Identifiable {
 
     /// Create an alternate app icon value.
@@ -44,4 +48,37 @@ public struct AlternateAppIcon: Identifiable {
 
     /// The name of the `.appiconset` asset, if any.
     public let appIconName: String?
+}
+
+@MainActor
+public extension AlternateAppIcon {
+
+    /// Reset the alternate app icon.
+    static func reset() {
+        setAlternateAppIcon(named: nil)
+    }
+
+    /// Set the icon as the current alternate app icon.
+    func set() {
+        Self.setAlternateAppIcon(named: appIconName)
+    }
+
+    /// Set an alternate app icon with a certain name.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the `.appiconset` asset to set.
+    static func setAlternateAppIcon(
+        named name: String?
+    ) {
+        #if os(iOS) || os(tvOS)
+        UIApplication.shared.setAlternateIconName(name)
+        #elseif os(macOS)
+        if let name {
+            NSApplication.shared.applicationIconImage = Bundle.main.image(forResource: name)
+        } else {
+            NSApplication.shared.applicationIconImage = nil
+        }
+        #endif
+    }
+
 }

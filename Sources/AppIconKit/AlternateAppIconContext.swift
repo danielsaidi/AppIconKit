@@ -9,7 +9,11 @@
 import Foundation
 import SwiftUI
 
-/// This observable context class can be used to managed the alternate app icon.
+/// This class can be used to managed the alternate app icon
+/// of the current app.
+///
+/// You can use the ``AlternateAppIcon`` directly instead if
+/// you don't need to show the selected icon within your app.
 @MainActor
 public class AlternateAppIconContext: ObservableObject {
 
