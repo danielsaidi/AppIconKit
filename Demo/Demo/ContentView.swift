@@ -31,7 +31,9 @@ struct ContentView: View {
                 context: context,
                 onIconSelected: { print("Selected \($0.name)") }
             )
+            #if !os(tvOS)
             .scrollContentBackground(.hidden)
+            #endif
             .background(Color.primary.opacity(0.05))
             .navigationTitle("AppIconKit")
             .toolbar {
