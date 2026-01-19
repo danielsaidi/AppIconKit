@@ -11,7 +11,7 @@ import SwiftUI
 
 /// This observable context class can be used to managed the alternate app icon.
 @MainActor
-open class AlternateAppIconContext: NSObject, ObservableObject {
+public final class AlternateAppIconContext: NSObject, ObservableObject {
 
     /// Create an alternate app icon context instance.
     public override init() {
@@ -27,20 +27,20 @@ open class AlternateAppIconContext: NSObject, ObservableObject {
     public private(set) var alternateAppIconName: String?
 
     /// Reset the alternate app icon.
-    open func resetAlternateAppIcon() {
+    public func resetAlternateAppIcon() {
         guard alternateAppIconName != nil else { return }
         setAlternateAppIconName(nil)
     }
 
     /// Set a certain alternate app icon.
-    open func setAlternateAppIcon(
+    public func setAlternateAppIcon(
         _ icon: AlternateAppIcon
     ) {
         setAlternateAppIconName(icon.appIconName)
     }
 
     /// Set an alternate app icon with a certain name.
-    open func setAlternateAppIconName(
+    public func setAlternateAppIconName(
         _ name: String?
     ) {
         alternateAppIconName = name
