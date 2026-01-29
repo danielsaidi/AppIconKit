@@ -43,7 +43,7 @@ You can use the ``AlternateAppIcon`` to set and reset the current icon if you do
 
 The context will automatically restore the icon on macOS, when a context instance is created.  
 
-> [!IMPORTANT]  
+> Important:
 > Make sure to enable `Include All App Icon Assets` in the app Info.plist for the app to be able to pick icons. You must add an `.imageset` and an `.appiconset` for each icon, since SwiftUI can't render `.appiconset`s and the OS can't use `.imageset`s as app icon.
 
 
