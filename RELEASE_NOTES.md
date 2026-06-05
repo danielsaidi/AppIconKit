@@ -1,5 +1,7 @@
 # Release Notes
 
+[AppIconKit](https://github.com/danielsaidi/AppIconKit) will use semantic versioning after 1.0.
+
 
 ## 0.9
 
