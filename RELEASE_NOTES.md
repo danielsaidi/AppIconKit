@@ -1,6 +1,27 @@
 # Release Notes
 
-[AppIconKit](https://github.com/danielsaidi/AppIconKit) will use semantic versioning after 1.0.
+[AppIconKit](https://github.com/danielsaidi/AppIconKit) honors semantic versioning, with the following strategy:
+
+* Deprecations can happen at any time.
+* Deprecations should only be removed in `major` updates.
+* Breaking changes should only occur in `major` updates.
+* Breaking changes *can* occur in non-major updates, if the alternative is worse.
+
+
+
+## 1.0
+
+This version replaces localized string keys with resources.
+
+### 💡 Changes
+
+* `AlternateAppIconCollection` now uses `LocalizedStringResource`.
+* `ItemShelf` now uses `LocalizedStringResource`.
+
+### ‼️ Breaking Changes
+
+* All deprecated code has been removed.
+
 
 
 ## 0.9

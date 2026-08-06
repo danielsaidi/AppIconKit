@@ -17,7 +17,7 @@ public struct AlternateAppIconCollection {
     ///   - name: The name of the section.
     ///   - icons: The icons in the section.
     public init(
-        name: LocalizedStringKey,
+        name: LocalizedStringResource,
         icons: [AlternateAppIcon]
     ) {
         self.name = name
@@ -43,7 +43,7 @@ public struct AlternateAppIconCollection {
     ///   - imageNamePrefix: A prefix to add to the `.imageset` asset name.
     ///   - appIconNamePrefix: A prefix to add to the `.appiconset` asset name.
     public init(
-        name: LocalizedStringKey,
+        name: LocalizedStringResource,
         appIconName: String,
         iconNames: [String],
         imageNamePrefix: String = "",
@@ -66,7 +66,7 @@ public struct AlternateAppIconCollection {
     }
 
     /// The name of the section.
-    public let name: LocalizedStringKey
+    public let name: LocalizedStringResource
 
     /// The icons in the section.
     public let icons: [AlternateAppIcon]

@@ -61,8 +61,8 @@ private extension ItemShelf {
         .scrollClipDisabled()
     }
 
-    func shelfTitle(for collection: Section) -> some View {
-        Text(collection.title)
+    func shelfTitle(for section: Section) -> some View {
+        Text(section.title)
             .font(.footnote)
             .textCase(.uppercase)
             .foregroundColor(.secondary)
@@ -86,14 +86,14 @@ private extension View {
 public struct ItemShelfSection<ItemType: Identifiable> {
     
     public init(
-        title: LocalizedStringKey,
+        title: LocalizedStringResource,
         items: [ItemType]
     ) {
         self.title = title
         self.items = items
     }
     
-    public let title: LocalizedStringKey
+    public let title: LocalizedStringResource
     public let items: [ItemType]
 }
 
