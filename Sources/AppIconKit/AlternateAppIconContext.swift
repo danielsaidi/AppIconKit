@@ -45,13 +45,6 @@ public extension AlternateAppIconContext {
         setAlternateAppIcon(named: icon.appIconName)
     }
 
-    @available(*, deprecated, renamed: "setAlternateAppIcon(named:)")
-    func setAlternateAppIconName(
-        _ name: String?
-    ) {
-        setAlternateAppIcon(named: name)
-    }
-
     /// Set an alternate app icon with a certain name.
     func setAlternateAppIcon(
         named name: String?
